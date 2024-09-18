@@ -7,15 +7,15 @@ This is a mini-course for experimental physicists, prepared by Sam Hile, in the 
 1.	Generic process control theory
 2.	Human intuition (timescale)
 3.	P, I, and D equations
-4.	Tuning procedures
-5.	Testing/verifying parameter stability and impulse response
-6.	Example 1: a course laser wavelength lock
-7.	Lock-in detection
-8.	PDH error signals
-9.	Analog circuitry for near-instant response
-10.	Example 2: Toptica FALC
-11.	Digital processing and FPGA control
-12.	Example 3: Sinara Suservo
+5.	Tuning procedures
+6.	Testing/verifying parameter stability and impulse response
+7.	Example 1: a course laser wavelength lock
+8.	Lock-in detection
+9.	PDH error signals
+10.	Analog circuitry for near-instant response
+11.	Example 2: Toptica FALC
+12.	Digital processing and FPGA control
+13.	Example 3: Sinara Suservo
 
 ## Generic process control theory
 [Wiki page for PID](https://en.wikipedia.org/wiki/PID_controller) is a nice place to start. (Just read the *Fundamental operation* section fr now, and skim the rest of the page)
@@ -45,29 +45,57 @@ Humans are naturally pretty good PID controllers, often without realising it. If
 :green_square: Blue player (setpoint) :green_square: Stand behind the red player, look at the relative error in the position of their red marker/pen and TILT the green marker/pen to suggest how they should correct for the error. Be genlte and don't break anybody's arm.
 
 
-
 ## P, I, and D equations
 The standard form of the mathematical expressions is something like:
 ![image](https://github.com/user-attachments/assets/5420f763-cbc4-4e0a-a457-977edeae96f0)
 
 You will also encounter this alternate form at some point in your life:
 ![image](https://github.com/user-attachments/assets/44c7d0ad-02e8-4db6-8831-f08d081fda69)
-here the I and D terms are encoded in a way that should hint at the timescales of derivative and integral action. 
+
+here the I and D terms are encoded in a way that should hint at the timescales of derivative and integral action. Before getting to carried away, bear in mind that the integral is usually in reality a discrete sum (and typically not with an infinite memory back to t=0), and in reality the derivative is a numerical difference based on the last few samples. The sample period will also renormalise the Ti and Td values.
+
+If you are a mathematician please do delve into derivations of all of the responses, textbooks on control theory are available from all good bookstores.
+
 
 ## Tuning procedures
+There are various schemes, including trial-and-error and beer-enabled-tinkering. For a deterministic approach to getting a decent configuration, consider the ZN method:
+
+![image](https://github.com/user-attachments/assets/feddb9fc-5a2f-4072-978c-aab9abb6fef6)
+
+You begin by turning all 3 terms to zero and then upping *Kp* to a critical level where obvious ongoing oscillations occur. This is *Ku*, and the period of the oscillations is *Tu*. Now choose either PI or PID mode and set the gains according to the table. If you go for P only mode, you normally find an eternal 'droop' where the value never quite reaches setpoint but is stable. 
 
 ## Testing/verifying parameter stability and impulse response
 
+
 ### Example 1: a course laser wavelength lock
+
 
 ## Lock-in detection
 
+
 ## PDH error signals
+
 
 ## Analog circuitry for near-instant response
 
+
 ### Example 2: Toptica FALC
 
+
 ## Digital processing and FPGA control
+For a microcontroller or computer to drive the PID loop, the whole thing must be discretised. Wiki presents a pseudocode implementation of a typical loop like so:
+```
+previous_error := 0
+integral := 0
+loop:
+   error := setpoint − measured_value
+   proportional := error;
+   integral := integral + error × dt
+   derivative := (error - previous_error) / dt
+   output := Kp × proportional + Ki × integral + Kd × derivative
+   previous_error := error
+   wait(dt)
+   goto loop
+```
     
 ### Example 3: Sinara Suservo
