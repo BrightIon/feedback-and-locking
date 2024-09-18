@@ -42,7 +42,7 @@ Humans are naturally pretty good PID controllers, often without realising it. If
 
 :red_square: Red player (process) :red_square: Sit in front of the desk, hold a red marker/pen in front of you on the desk surface. With your other hand, hold a green marker/pen directly above your head. As the green marker (and your arm) is tilted, slide the red marker left/right in response. Try to be consistent, and **do it all with your eyes closed**.
 
-:green_square: Blue player (setpoint) :green_square: Stand behind the red player, look at the relative error in the position of their red marker/pen and TILT the green marker/pen to suggest how they should correct for the error. Be genlte and don't break anybody's arm.
+:green_square: Green player (setpoint) :green_square: Stand behind the red player, look at the relative error in the position of their red marker/pen and TILT the green marker/pen to suggest how they should correct for the error. Be genlte and don't break anybody's arm.
 
 
 ## P, I, and D equations
