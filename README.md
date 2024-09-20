@@ -103,5 +103,9 @@ The SUServo is a PI feedback controller implemented within the Kasli FPGA, using
 
 ![image](https://github.com/user-attachments/assets/c788abde-0a4a-4573-b9c5-a19033f4c10c)
 
+the connection can be seen in the coredevice driver code (I cropped out some confusing edge case handling):
+
+![image](https://github.com/user-attachments/assets/ac26f340-3262-40bc-9db0-69e248970c2f)
+ 
 
 
