@@ -99,3 +99,9 @@ loop:
 ```
     
 ### Example 3: Sinara Suservo
+The SUServo is a PI feedback controller implemented within the Kasli FPGA, using Urukul and Sampler cards as the output and measurement elements respectively. Its a digital discrete time feedback engine, which can be called an IIR filter (Infinite Impulse Response). Looking at the recurrence relation it is not immediately easy to see how it relates to the pseudocode logic above, and the *Ki* and *Kp* gain parameters which are nevertheless embedded in the *a* and *b* coefficients.
+
+![image](https://github.com/user-attachments/assets/c788abde-0a4a-4573-b9c5-a19033f4c10c)
+
+
+
