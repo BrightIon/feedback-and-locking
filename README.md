@@ -118,5 +118,9 @@ the connection can be seen in the coredevice driver code (I cropped out some con
 ![image](https://github.com/user-attachments/assets/cb7f3b8d-fb1f-4314-b89e-278d365899cd)
 
  
+# Project
+You will write a short report (single A4 page equivalent) and join in a brief Q&A with other learners on your choice of either:
+ * one of the detail chapters of Brett Beauregard's '[Improving the Beginner's PID](http://brettbeauregard.com/blog/tag/beginners-pid/)' blog thingy
+ * your own implementation of a feedback loop with hardware in the lab (or in the home!)
 
 
