@@ -71,7 +71,12 @@ Now, go back to the simulator and explore a little more. You can attempt to repl
 
 
 ## Lock-in detection
+In some situations, a direct process measurement is impractical or impossible to obtain. This could be where the environment is extremely noisy, or simply where no transducer is capable of digitising the parameter of interest fast enough to be useful. An example of the former is in the implementation of an AM radio. An example of the latter is in locking a narrow linewidth laser source to a reference resonance. 
 
+#### The radio
+If your ye olde radio* just absorbed all the raw EM radiation around 1600kHz, you'd get nothing but garbage. All sorts of stuff is emitting all over the place and to deal with it we designate a particular frequency for each station. You tune to precicely 1611kHz say, using an internal local oscillator in your radio, and correlate whatever chaos the antenna collects with your clean sine wave, and then send the demodulated thing to the speaker. Mathematically its a signal product, hardware-wise its an 'RF mixer', and in the context of our control discussion we could call the arrangement a lock-in amplifier.
+
+*Modern radios have fast microcontrollers and can do it all with digital signal processing, and it tends to work more cleanly - ultimately the strategy is the same.
 
 ## PDH error signals
 
