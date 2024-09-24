@@ -58,14 +58,14 @@ If you are a mathematician please do delve into derivations of all of the respon
 
 
 ## Tuning procedures
-There are various schemes, including trial-and-error and beer-enabled-tinkering. For a deterministic approach to getting a decent configuration, consider the ZN method:
+There are various schemes, including trial-and-error and beer-enabled-tinkering. For a deterministic approach to getting a decent configuration, consider the ZN (Ziegler-Nicholls) method:
 
 ![image](https://github.com/user-attachments/assets/feddb9fc-5a2f-4072-978c-aab9abb6fef6)
 
-You begin by turning all 3 terms to zero and then upping *Kp* to a critical level where obvious ongoing oscillations occur. This is *Ku*, and the period of the oscillations is *Tu*. Now choose either PI or PID mode and set the gains according to the table. If you go for P only mode, you normally find an eternal 'droop' where the value never quite reaches setpoint but is stable. 
+You begin by turning all 3 terms to zero and then upping *Kp* to a critical level where obvious ongoing oscillations occur. This is *Ku*, and the period of the oscillations is *Tu*. Now choose either PI or PID mode and set the gains according to the table. If you go for P only mode, you normally find an eternal 'droop' where the value never quite reaches setpoint but is stable. Some (well behaved) systems will react nicely to ZN tuned values, others not so much.
 
 ## Testing/verifying parameter stability and impulse response
-
+Now, go back to the simulator and explore a little more. You can attempt to replicate various plots on the wiki page if you feel like it. A perfectly tuned controller will quickly react to a large setpoint change with minimal overshoot and oscillation, and not be overly sensitive to noisy measurement.
 
 ### Example 1: a course laser wavelength lock
 
@@ -77,7 +77,12 @@ You begin by turning all 3 terms to zero and then upping *Kp* to a critical leve
 
 
 ## Analog circuitry for near-instant response
+It is possible to do all the maths in the form of analog voltage signals. What you need is a few op-amps, potentiometers, and some RC low-pass and high-pass filter arrangements. Here is a generic schematic:
 
+![image](https://github.com/user-attachments/assets/7ce34bb5-daf9-4821-a650-2bed36469641)
+
+
+[More details](https://control.com/textbook/closed-loop-control/analog-electronic-pid-controllers)
 
 ### Example 2: Toptica FALC
 
