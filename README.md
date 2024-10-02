@@ -20,7 +20,7 @@ This is a mini-course for experimental physicists, prepared by Sam Hile, in the 
 ## Generic process control theory
 [Wiki page for PID](https://en.wikipedia.org/wiki/PID_controller) is a nice place to start. (Just read the *Fundamental operation* section fr now, and skim the rest of the page)
 
-Once you've read a bit about the concept, dive in and [play with a simulator](http://grauonline.de/alexwww/ardumower/pid/pid.html). Here the blue line represents the setpoint (target value); red "control input" line represents a measurement of the process value; and the green "control output" line shows the actively controlled signal sent out by the controller to try to minimise the error (i.e. overlap red onto blue). The The default configuration in the simulator is slightly confusing, so I reccommend pasting in this custom model and going through the following steps initially
+Once you've read a bit about the concept, dive in and [play with a simulator](https://brightion.github.io/feedback-and-locking/). There the blue line represents the setpoint (target value); red "control input" line represents a measurement of the process value; and the green "control output" line shows the actively controlled signal sent out by the controller to try to minimise the error (i.e. overlap red onto blue). The The default configuration in the simulator is slightly confusing, so I reccommend pasting in this custom model and going through the following steps initially
 ```
 if (typeof user.h === 'undefined'){ user.h = [10,10,10,10,10,10,10,10]; };
 for(var i=0;i<7;i++){ user.h[i] = user.h[i+1]; };
