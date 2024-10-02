@@ -78,7 +78,20 @@ If your ye olde radio* just absorbed all the raw EM radiation around 1600kHz, yo
 
 *Modern radios have fast microcontrollers and can do it all with digital signal processing, and it tends to work more cleanly - ultimately the strategy is the same.
 
+#### A basic laser lock
+A common trick in atomic physics is to buy a 'cheap' laser that wobbles around a bit in terms of its wavelength, and use some absolute reference like a bunch of Rb atoms that absorb a very specific wavelength. Topica have a [nice little overview](https://www.toptica.com/application-notes/phase-and-frequency-locking-of-diode-lasers/error-signal-generation/general-error-signal-generation-schemes) from which I've borrowed the diagram below. If you intentially wiggle the laser wavelength, you can correlate any wiggle in the transmitted light intensity and decide whether you are on the left or right flank of the resonance. 
+
+As it turns out, mathematically what we want is the derivative of a naturally available signal - something that tells us in which direction to make a correction back to the ideal value (in another way of looking at it, the setpoint is somehow externally defined)
+
+![image](https://github.com/user-attachments/assets/5400ca03-8cbe-4889-ba0a-5c05e1e2c48c) . . . ![image](https://github.com/user-attachments/assets/6429bde4-4c48-45aa-a67b-c7f55c5308e9)
+
+
 ## PDH error signals
+The lock-in scheme has a shortcoming - if the resonance is very narrow, it only works when you're very nearly spot-on. Some clever chaps (Pound, Drever & Hall probably) figured out a variant that provides a much bigger capture range, and at the same time tends to have higher bandwidth / faster response time. Win-win!
+
+You can read a [very detailed primer on it](https://doi.org/10.1119/1.1286663) if you like. The very rough summary is that it stretches out the derivative peaks, with a sharp and narrow positive-negative transition at the middle, giving a robust and high quality error signal.
+
+![image](https://github.com/user-attachments/assets/be902f2b-8cca-469d-9b09-44910c8e8ad6)
 
 
 ## Analog circuitry for near-instant response
