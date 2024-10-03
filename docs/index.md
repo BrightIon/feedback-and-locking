@@ -49,7 +49,7 @@ You will also encounter this alternate form at some point in your life:
 
 here the I and D terms are encoded in a way that should hint at the timescales of derivative and integral action. Before getting to carried away, bear in mind that the integral is usually in reality a discrete sum (and typically not with an infinite memory back to t=0), and in reality the derivative is a numerical difference based on the last few samples. The sample period will also renormalise the Ti and Td values.
 
-If you are a mathematician please do delve into derivations of all of the responses, textbooks on control theory are available from all good bookstores.
+If you are a mathematician please do delve into derivations of all of the responses, [textbooks on control theory are available](https://doi.org/10.1109/MCS.2007.365006) from all good bookstores.
 
 
 ## Tuning procedures
@@ -63,17 +63,33 @@ You begin by turning all 3 terms to zero and then upping *Kp* to a critical leve
 Now, go back to the simulator and explore a little more. You can attempt to replicate various plots on the wiki page if you feel like it. A perfectly tuned controller will quickly react to a large setpoint change with minimal overshoot and oscillation, and not be overly sensitive to noisy measurement.
 
 ### Example 1: a course laser wavelength lock
+[WAnD](https://github.com/OxfordIonTrapGroup/wand) is an (artiq-adjacent) program for scalable laser frequency tuning via one or more [wavelength meters](https://www.highfinesse.com/en/technology/fizeau-principle.html). It, belive it or not, uses a PID loop. Admittedly its only using the P term out-of-the-box. Here is the core logic with the fluff filtered out:
 
+```py
+while running:
+    # fetch a measurement 
+    f_error = await get_freq(laser, offset_mode=True)
+
+    # calculate the voltage change to output
+    V_error = f_error * gain
+
+    # fetch the old output and adjust
+    v_pzt = await voltage_get()
+    v_pzt -= V_error
+
+    # set the new output
+    await voltage_set(v_pzt)
+```
 
 ## Lock-in detection
-In some situations, a direct process measurement is impractical or impossible to obtain. This could be where the environment is extremely noisy, or simply where no transducer is capable of digitising the parameter of interest fast enough to be useful. An example of the former is in the implementation of an AM radio. An example of the latter is in locking a narrow linewidth laser source to a reference resonance. 
+In some situations, a direct process measurement is impractical or impossible to obtain. This could be where the environment is extremely noisy, or simply where no transducer is capable of digitising the parameter of interest fast enough to be useful. An example of the former is in the implementation of an AM radio. An example of the latter is in locking a narrow linewidth laser source to a reference resonance. See also [Lock-In Amplifier](https://en.wikipedia.org/wiki/Lock-in_amplifier) and [Heterodyne detector](https://en.wikipedia.org/wiki/Homodyne_detection)
 
 #### The radio
 If your ye olde radio* just absorbed all the raw EM radiation around 1600kHz, you'd get nothing but garbage. All sorts of stuff is emitting all over the place and to deal with it we designate a particular frequency for each station. You tune to precicely 1611kHz say, using an internal local oscillator in your radio, and correlate whatever chaos the antenna collects with your clean sine wave, and then send the demodulated thing to the speaker. Mathematically its a signal product, hardware-wise its an 'RF mixer', and in the context of our control discussion we could call the arrangement a lock-in amplifier.
 
 *Modern radios have fast microcontrollers and can do it all with digital signal processing, and it tends to work more cleanly - ultimately the strategy is the same.
 
-#### A basic laser lock
+#### A resonance laser lock
 A common trick in atomic physics is to buy a 'cheap' laser that wobbles around a bit in terms of its wavelength, and use some absolute reference like a bunch of Rb atoms that absorb a very specific wavelength. Topica have a [nice little overview](https://www.toptica.com/application-notes/phase-and-frequency-locking-of-diode-lasers/error-signal-generation/general-error-signal-generation-schemes) from which I've borrowed the diagram below. If you intentially wiggle the laser wavelength, you can correlate any wiggle in the transmitted light intensity and decide whether you are on the left or right flank of the resonance. 
 
 As it turns out, mathematically what we want is the derivative of a naturally available signal - something that tells us in which direction to make a correction back to the ideal value (in another way of looking at it, the setpoint is somehow externally defined)
@@ -98,7 +114,7 @@ It is possible to do all the maths in the form of analog voltage signals. What y
 [More details](https://control.com/textbook/closed-loop-control/analog-electronic-pid-controllers)
 
 ### Example 2: Toptica FALC
-
+""The FALC pro is a high-performance controller with unrivalled bandwidth and signal delay. It is the perfect choice for reducing the laser linewidth, e.g. by realizing a PDH lock on a high-finesse cavity in combination with the PDH/DLC pro module. While it is an analog controller and thus reaches extremely low signal delays of typically 10 ns, it features a digital interface, which is responsible for its very convenient usability. It allows remote locking and combining it with the DLC pro lock enables the automatic relock and the click&lock function. It also includes a frequency mixer and thus is the perfect choice to implement an offset phase lock.""  --[someone at toptica](https://www.toptica.com/products/tunable-diode-lasers/laser-locking-electronics/falc-pro)
 
 ## Digital processing and FPGA control
 For a microcontroller or computer to drive the PID loop, the whole thing must be discretised. Wiki presents a pseudocode implementation of a typical loop like so:
