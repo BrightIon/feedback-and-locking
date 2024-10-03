@@ -20,20 +20,15 @@ This is a mini-course for experimental physicists, prepared by Sam Hile, in the 
 ## Generic process control theory
 [Wiki page for PID](https://en.wikipedia.org/wiki/PID_controller) is a nice place to start. (Just read the *Fundamental operation* section fr now, and skim the rest of the page)
 
-Once you've read a bit about the concept, dive in and [play with a simulator](http://grauonline.de/alexwww/ardumower/pid/pid.html). Here the blue line represents the setpoint (target value); red "control input" line represents a measurement of the process value; and the green "control output" line shows the actively controlled signal sent out by the controller to try to minimise the error (i.e. overlap red onto blue). The The default configuration in the simulator is slightly confusing, so I reccommend pasting in this custom model and going through the following steps initially
-```
-if (typeof user.h === 'undefined'){ user.h = [10,10,10,10,10,10,10,10]; };
-for(var i=0;i<7;i++){ user.h[i] = user.h[i+1]; };
-user.h[7] = output;
-return (8*user.h[0]+6*user.h[1]+4*user.h[2]+3*user.h[3]+2*user.h[5]+30*noise)/30;
-```
+Once you've read a bit about the concept, dive in and [play with a simulator](https://brightion.github.io/feedback-and-locking/). There the blue line represents the setpoint (target value); red "control input" line represents a measurement of the process value; and the green "control output" line shows the actively controlled signal sent out by the controller to try to minimise the error (i.e. overlap red onto blue). The The default configuration in the simulator is slightly confusing, so I reccommend going through the following steps initially
 
- * `Apply` the model code
+ * set noise to zero
  * set Ki to zero
  * set Kd to zero
  * set Kp to ~0.5, and wait for things to settle
  * suddenly move the setpoint from positive to negative and back again to observe how fast the system takes to react to an impulse
  * now make small changes to the gains (K values) and repeat the impluse in order to explore...
+ * turn the noise back up 
 
 ## Human intuition (timescale)
 Humans are naturally pretty good PID controllers, often without realising it. If you have 3 people and a table/desk, its possible to play a game:
