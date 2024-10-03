@@ -18,17 +18,7 @@ This is a mini-course for experimental physicists, prepared by Sam Hile, in the 
 13.	Example 3: Sinara Suservo
 
 ## Generic process control theory
-[Wiki page for PID](https://en.wikipedia.org/wiki/PID_controller) is a nice place to start. (Just read the *Fundamental operation* section fr now, and skim the rest of the page)
-
-Once you've read a bit about the concept, dive in and [play with a simulator](https://brightion.github.io/feedback-and-locking/sim). There the blue line represents the setpoint (target value); red "control input" line represents a measurement of the process value; and the green "control output" line shows the actively controlled signal sent out by the controller to try to minimise the error (i.e. overlap red onto blue). The The default configuration in the simulator is slightly confusing, so I reccommend going through the following steps initially
-
- * set noise to zero
- * set Ki to zero
- * set Kd to zero
- * set Kp to ~0.5, and wait for things to settle
- * suddenly move the setpoint from positive to negative and back again to observe how fast the system takes to react to an impulse
- * now make small changes to the gains (K values) and repeat the impluse in order to explore...
- * turn the noise back up 
+We are going to be discussing cloded-loop process control. Aka *FEEDBACK*. There is some system or 'process', we externally control it by first measuring some variable that is a consequence of the process (controller input), deciding how wrong it is with reference to a setpoint, and actuating something to influence the process (controller output). The [Wiki page for PID](https://en.wikipedia.org/wiki/PID_controller) is a nice place to start. (Just read the *Fundamental operation* section fr now, and skim the rest of the page)
 
 ## Human intuition (timescale)
 Humans are naturally pretty good PID controllers, often without realising it. If you have 3 people and a table/desk, its possible to play a game:
@@ -60,7 +50,18 @@ There are various schemes, including trial-and-error and beer-enabled-tinkering.
 You begin by turning all 3 terms to zero and then upping *Kp* to a critical level where obvious ongoing oscillations occur. This is *Ku*, and the period of the oscillations is *Tu*. Now choose either PI or PID mode and set the gains according to the table. If you go for P only mode, you normally find an eternal 'droop' where the value never quite reaches setpoint but is stable. Some (well behaved) systems will react nicely to ZN tuned values, others not so much.
 
 ## Testing/verifying parameter stability and impulse response
-Now, go back to the simulator and explore a little more. You can attempt to replicate various plots on the wiki page if you feel like it. A perfectly tuned controller will quickly react to a large setpoint change with minimal overshoot and oscillation, and not be overly sensitive to noisy measurement.
+
+Once you've read a bit about the concept, dive in and [play with a simulator](https://brightion.github.io/feedback-and-locking/sim). There the blue line represents the setpoint (target value); red "control input" line represents a measurement of the process value; and the green "control output" line shows the actively controlled signal sent out by the controller to try to minimise the error (i.e. overlap red onto blue). I reccommend going through the following steps initially
+
+ * set noise to zero
+ * set Ki to zero
+ * set Kd to zero
+ * set Kp to ~0.5, and wait for things to settle
+ * suddenly move the setpoint from positive to negative and back again to observe how fast the system takes to react to an impulse
+ * now make small changes to the gains (K values) and repeat the impluse in order to explore...
+ * turn the noise back up 
+
+Now, go back to the simulator and explore a little more. You can try the other settings of the process selector. You can attempt to replicate various plots on the wiki page if you feel like it. A perfectly tuned controller will quickly react to a large setpoint change with minimal overshoot and oscillation, and not be overly sensitive to noisy measurement. You can even edit the model script to challenge your friends!
 
 ### Example 1: a course laser wavelength lock
 [WAnD](https://github.com/OxfordIonTrapGroup/wand) is an (artiq-adjacent) program for scalable laser frequency tuning via one or more [wavelength meters](https://www.highfinesse.com/en/technology/fizeau-principle.html). It, belive it or not, uses a PID loop. Admittedly its only using the P term out-of-the-box. Here is the core logic with the fluff filtered out:
