@@ -32,10 +32,10 @@ Humans are naturally pretty good PID controllers, often without realising it. If
 
 ## P, I, and D equations
 The standard form of the mathematical expressions is something like:
-![image](https://github.com/user-attachments/assets/5420f763-cbc4-4e0a-a457-977edeae96f0)
+![image](imgs/std_expression.png)
 
 You will also encounter this alternate form at some point in your life:
-![image](https://github.com/user-attachments/assets/44c7d0ad-02e8-4db6-8831-f08d081fda69)
+![image](imgs/alt_expression.png)
 
 here the I and D terms are encoded in a way that should hint at the timescales of derivative and integral action. Before getting to carried away, bear in mind that the integral is usually in reality a discrete sum (and typically not with an infinite memory back to t=0), and in reality the derivative is a numerical difference based on the last few samples. The sample period will also renormalise the Ti and Td values.
 
@@ -45,7 +45,7 @@ If you are a mathematician please do delve into derivations of all of the respon
 ## Tuning procedures
 There are various schemes, including trial-and-error and beer-enabled-tinkering. For a deterministic approach to getting a decent configuration, consider the ZN (Ziegler-Nicholls) method:
 
-![image](https://github.com/user-attachments/assets/feddb9fc-5a2f-4072-978c-aab9abb6fef6)
+![image](imgs/zn_table.png)
 
 You begin by turning all 3 terms to zero and then upping *Kp* to a critical level where obvious ongoing oscillations occur. This is *Ku*, and the period of the oscillations is *Tu*. Now choose either PI or PID mode and set the gains according to the table. If you go for P only mode, you normally find an eternal 'droop' where the value never quite reaches setpoint but is stable. Some (well behaved) systems will react nicely to ZN tuned values, others not so much.
 
@@ -95,7 +95,7 @@ A common trick in atomic physics is to buy a 'cheap' laser that wobbles around a
 
 As it turns out, mathematically what we want is the derivative of a naturally available signal - something that tells us in which direction to make a correction back to the ideal value (in another way of looking at it, the setpoint is somehow externally defined)
 
-![image](https://github.com/user-attachments/assets/5400ca03-8cbe-4889-ba0a-5c05e1e2c48c) . . . ![image](https://github.com/user-attachments/assets/6429bde4-4c48-45aa-a67b-c7f55c5308e9)
+![image](imgs/toptica_error.png) . . . ![image](imgs/toptica_lockin.png)
 
 
 ## PDH error signals
@@ -103,13 +103,13 @@ The lock-in scheme has a shortcoming - if the resonance is very narrow, it only 
 
 You can read a [very detailed primer on it](https://doi.org/10.1119/1.1286663) if you like. The very rough summary is that it stretches out the derivative peaks, with a sharp and narrow positive-negative transition at the middle, giving a robust and high quality error signal.
 
-![image](https://github.com/user-attachments/assets/be902f2b-8cca-469d-9b09-44910c8e8ad6)
+![image](imgs/pdh_peaks.png)
 
 
 ## Analog circuitry for near-instant response
 It is possible to do all the maths in the form of analog voltage signals. What you need is a few op-amps, potentiometers, and some RC low-pass and high-pass filter arrangements. Here is a generic schematic:
 
-![image](https://github.com/user-attachments/assets/7ce34bb5-daf9-4821-a650-2bed36469641)
+![image](imgs/analog_circuit.png)
 
 
 [More details](https://control.com/textbook/closed-loop-control/analog-electronic-pid-controllers)
@@ -136,11 +136,11 @@ loop:
 ### Example 3: Sinara Suservo
 The SUServo is a PI feedback controller implemented within the Kasli FPGA, using Urukul and Sampler cards as the output and measurement elements respectively. Its a digital discrete time feedback engine, which can be called an IIR filter (Infinite Impulse Response). Looking at the recurrence relation it is not immediately easy to see how it relates to the pseudocode logic above, and the *Ki* and *Kp* gain parameters which are nevertheless embedded in the *a* and *b* coefficients.
 
-![image](https://github.com/user-attachments/assets/c788abde-0a4a-4573-b9c5-a19033f4c10c)
+![image](imgs/suservo_docs.png)
 
 the connection can be seen in the coredevice driver code (I cropped out some confusing edge case handling):
 
-![image](https://github.com/user-attachments/assets/cb7f3b8d-fb1f-4314-b89e-278d365899cd)
+![image](imgs/suservo_src.png)
 
  
 # Project
