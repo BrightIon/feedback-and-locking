@@ -23,11 +23,11 @@ We are going to be discussing cloded-loop process control. Aka *FEEDBACK*. There
 ## Human intuition (timescale)
 Humans are naturally pretty good PID controllers, often without realising it. If you have 3 people and a table/desk, its possible to play a game:
 
-:blue_square: Blue player (setpoint) :blue_square: Stand behind the desk, place a blue marker/pen on the desk. Occasionally slide it to the left or to the right to change the setpoint.
+:blue_square: Blue player (setpoint) 🟦 Stand behind the desk, place a blue marker/pen on the desk. Occasionally slide it to the left or to the right to change the setpoint.
 
-:red_square: Red player (process) :red_square: Sit in front of the desk, hold a red marker/pen in front of you on the desk surface. With your other hand, hold a green marker/pen directly above your head. As the green marker (and your arm) is tilted, slide the red marker left/right in response. Try to be consistent, and **do it all with your eyes closed**.
+:red_square: Red player (process) 🟥 Sit in front of the desk, hold a red marker/pen in front of you on the desk surface. With your other hand, hold a green marker/pen directly above your head. As the green marker (and your arm) is tilted, slide the red marker left/right in response. Try to be consistent, and **do it all with your eyes closed**.
 
-:green_square: Green player (setpoint) :green_square: Stand behind the red player, look at the relative error in the position of their red marker/pen and TILT the green marker/pen to suggest how they should correct for the error. Be genlte and don't break anybody's arm.
+:green_square: Green player (setpoint) 🟩 Stand behind the red player, look at the relative error in the position of their red marker/pen and TILT the green marker/pen to suggest how they should correct for the error. Be genlte and don't break anybody's arm.
 
 
 ## P, I, and D equations
@@ -115,7 +115,7 @@ It is possible to do all the maths in the form of analog voltage signals. What y
 [More details](https://control.com/textbook/closed-loop-control/analog-electronic-pid-controllers)
 
 ### Example 2: Toptica FALC
-""The FALC pro is a high-performance controller with unrivalled bandwidth and signal delay. It is the perfect choice for reducing the laser linewidth, e.g. by realizing a PDH lock on a high-finesse cavity in combination with the PDH/DLC pro module. While it is an analog controller and thus reaches extremely low signal delays of typically 10 ns, it features a digital interface, which is responsible for its very convenient usability. It allows remote locking and combining it with the DLC pro lock enables the automatic relock and the click&lock function. It also includes a frequency mixer and thus is the perfect choice to implement an offset phase lock.""  --[someone at toptica](https://www.toptica.com/products/tunable-diode-lasers/laser-locking-electronics/falc-pro)
+"The FALC pro is a high-performance controller with unrivalled bandwidth and signal delay. It is the perfect choice for reducing the laser linewidth, e.g. by realizing a PDH lock on a high-finesse cavity in combination with the PDH/DLC pro module. While it is an analog controller and thus reaches extremely low signal delays of typically 10 ns, it features a digital interface, which is responsible for its very convenient usability. It allows remote locking and combining it with the DLC pro lock enables the automatic relock and the click&lock function. It also includes a frequency mixer and thus is the perfect choice to implement an offset phase lock."  --[someone at Toptica](https://www.toptica.com/products/tunable-diode-lasers/laser-locking-electronics/falc-pro)
 
 ## Digital processing and FPGA control
 For a microcontroller or computer to drive the PID loop, the whole thing must be discretised. Wiki presents a pseudocode implementation of a typical loop like so:
