@@ -1,7 +1,7 @@
 # feedback-and-locking
-Feedback controllers, PID loops, analog and digital varieties, locking to a reference
+We will discuss feedback controllers in general, PID loops and how to tune them, analog and digital implementations with software and with physical hardware, locking to a reference - particularly laser locking using high bandwith schemes.
 
-This is a mini-course for experimental physicists, prepared by Sam Hile, in the context of the IQT research group at Sussex.
+> This is a mini-course for experimental physicists, prepared by Sam Hile around 2023, in the context of the IQT research group at Sussex. It normally involves ~4hrs of interactive lecture/discussion to cover the content. To properly master the ideas, learners should spend probably twice that much time reading further and exploring the topics on their own.
 
 ## Contents
 1.	Generic process control theory
@@ -144,8 +144,10 @@ the connection can be seen in the coredevice driver code (I cropped out some con
 
  
 # Project
-You will write a short report (single A4 page equivalent) and join in a brief Q&A with other learners on your choice of either:
- * literature review and analysis based on one of the advanced chapters of Brett Beauregard's '[Improving the Beginner's PID](http://brettbeauregard.com/blog/tag/beginners-pid/)' blog thingy
- * your own implementation of a feedback loop with hardware in the lab (or in the home!)
+The project is expected to take some tens of hours, so a few days of focussed attention. The objective is to *a)* gain a solid understanding of the broad topic as covered in the lecture-like content above AND *b)* to really become an expert on a narrower element within the realm of feedback/feedforward/locking.
+
+You will write a short report (around four A4 page equivalent) and join in a brief Q&A with other learners on your choice of either:
+ * A detailed literature review and analysis based on one of the advanced chapters of Brett Beauregard's '[Improving the Beginner's PID](http://brettbeauregard.com/blog/tag/beginners-pid/)' blog thingy (or an equivalent topic agreed by me)
+ * A design and test report on your own implementation of a feedback loop with physical hardware in the lab (or in the home!)
 
 

@@ -1,7 +1,7 @@
 # feedback-and-locking
-Feedback controllers, PID loops, analog and digital varieties, locking to a reference
+We will discuss feedback controllers in general, PID loops and how to tune them, analog and digital implementations with software and with physical hardware, locking to a reference - particularly laser locking using high bandwith schemes.
 
-This is a mini-course for experimental physicists, prepared by Sam Hile, in the context of the IQT research group at Sussex.
+> This is a mini-course for experimental physicists, prepared by Sam Hile around 2023, in the context of the IQT research group at Sussex. It normally involves ~4hrs of interactive lecture/discussion to cover the content. To properly master the ideas, learners should spend probably twice that much time reading further and exploring the topics on their own.
 
 ## Contents
 1.	Generic process control theory
