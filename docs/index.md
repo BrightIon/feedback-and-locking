@@ -150,4 +150,7 @@ You will write a short report (around four A4 page equivalent) and join in a bri
  * A detailed literature review and analysis based on one of the advanced chapters of Brett Beauregard's '[Improving the Beginner's PID](http://brettbeauregard.com/blog/tag/beginners-pid/)' blog thingy (or an equivalent topic agreed by me)
  * A design and test report on your own implementation of a feedback loop with physical hardware in the lab (or in the home!)
 
+The report should be formatted as markdown and merged into one of the following places within the course repo:
+  * [Advanced Topics](/advanced.md)
+  * [Implementation Examples](/implementations.md)
 
